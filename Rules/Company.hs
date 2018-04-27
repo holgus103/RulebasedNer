@@ -5,9 +5,12 @@ import Rules.Commons
 companyKeywords :: [String]
 companyKeywords = ["firmy", "firma"]
 
-detectCompany :: [String] -> [Token] 
-detectCompany (x:xs) = 
-    if elem x companyKeywords then [None, Company] ++ (detectCompany $ tail xs)
-    else None:(detectCompany xs) 
+detectCompany :: [String] -> Tagging
+detectCompany (x:x2:xs) = 
+    if elem x companyKeywords && isCompany x2 then Matched [None, Company] $ xs 
+    else Unmatched
 
-detectCompany [] = []
+detectCompany [] = Unmatched
+
+isCompany :: String -> Bool
+isCompany x = True
