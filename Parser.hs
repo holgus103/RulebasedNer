@@ -10,9 +10,6 @@ loadDataset path = do
     input <- readFile path
     return ((decodeJSON input)::[Entry]) 
 
-
-
-
 data Subentity = Subentity {
     end :: Int,
     value :: String,
