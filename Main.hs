@@ -1,4 +1,8 @@
+import Parser
+
 module Main where 
 
-main :: IO
-main = 
+main :: IO ()
+main = do
+    d <- loadDataset "data.json"
+    

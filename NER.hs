@@ -22,5 +22,4 @@ applyRules text (rule:remainingRules) =
     case rule text of Unmatched -> applyRules text remainingRules
                       Matched tokens rest -> (tokens, rest) 
 
-    
-    
+

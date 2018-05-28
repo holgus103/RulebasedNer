@@ -5,28 +5,18 @@ import Text.JSON
 import Text.JSON.Generic
 import System.IO
 
-loadDataset :: String -> IO [Entry]
+loadDataset :: String -> IO [Subentity]
 loadDataset path = do
     input <- readFile path
-    return ((decodeJSON input)::[Entry]) 
+    return ((decodeJSON input) :: [Subentity])    
 
 data Subentity = Subentity {
     end :: Int,
     value :: String,
     entity :: String,
     start :: Int
-} deriving (Eq, Show, Data, Typeable)
+} deriving (Eq, Data, Show, Typeable)
 
-data MainEntity = MainEntity {
-    end :: Int,
-    value :: String,
-    entity :: String,
-    start :: Int,
-    subentities :: [Subentity]
-} deriving (Eq, Show, Data, Typeable)
+
+buildDictionary :: [Subentity] -> Set
     
-data Entry = Entry {
-    text :: String,
-    entities :: [MainEntity]
-    
-} deriving (Eq, Show, Data, Typeable)
