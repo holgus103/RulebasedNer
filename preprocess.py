@@ -28,6 +28,7 @@ for v in data:
             shift = e["start"]
         else:
             print("error at: ")
+            print(json.dumps(e))
             print(txt)
             continue
         if "subentities" in e:
@@ -48,12 +49,9 @@ for v in data:
 
 
 
+z = list(zip(samples, tokens));
+output = json.dumps(z);
+file = open("output3.json", "w")
+file.write(output)
+file.close()
 
-# entities = list(map(lambda x: x["entities"], data))
-# #flatmap
-# entities = [x for y in entities for x in y]
-# subentities  = list(map(extractEntities, entities))
-# subentities = list(filter(lambda x: x != None, subentities))
-
-# subentities = [x for y in subentities for x in y]
-# json.dumps(subentities)
