@@ -25,17 +25,11 @@ data Sample = Sample {
     labels :: [Token]
 } deriving (Show)
 
-buildDictionary :: [Sample] ->  Map.Map Token (Set.Set String)
+buildDictionary :: [Sample] ->  Map.Map String Token 
 buildDictionary input = 
-    [Company, Unit, Num, Product, Shop]
-    |> map (\x -> (x, getSetEntities x))
+    zip allWords allLabels
+    |> filter (\(word, label) -> label /= None)
     |> Map.fromList
     where
         allWords = concatMap Parser.words input
         allLabels = concatMap Parser.labels input
-        entries = zip allWords allLabels
-        getSetEntities x =
-            filter (\(word, label) -> label == x) entries
-            |> map (\(word, label) -> word)
-            |> Set.fromList 
-    
