@@ -18,6 +18,11 @@ instance Ord Token where
 
 data Tagging = Matched [Token] [String] | Unmatched deriving Show
 
+data Sample = Sample {
+    words :: [String],
+    labels :: [Token]
+} deriving (Show)
+
 tokenFromString :: String -> Token
 tokenFromString s = 
     case s of

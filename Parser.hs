@@ -20,10 +20,6 @@ sampleFromRawEntry :: [[String]] -> Sample
 sampleFromRawEntry entry =
     Sample {words = tail entry |> head, labels = head entry |> map tokenFromString }
     
-data Sample = Sample {
-    words :: [String],
-    labels :: [Token]
-} deriving (Show)
 
 buildDictionary :: [Sample] ->  Map.Map String Token 
 buildDictionary input = 
@@ -31,5 +27,5 @@ buildDictionary input =
     |> filter (\(word, label) -> label /= None)
     |> Map.fromList
     where
-        allWords = concatMap Parser.words input
-        allLabels = concatMap Parser.labels input
+        allWords = concatMap Rules.Commons.words input
+        allLabels = concatMap Rules.Commons.labels input

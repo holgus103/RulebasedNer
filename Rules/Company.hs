@@ -10,7 +10,7 @@ detectCompany (x:x2:xs) =
     if elem x companyKeywords && isCompany x2 then Matched [None, Company] $ xs 
     else Unmatched
 
-detectCompany [] = Unmatched
+detectCompany _ = Unmatched
 
 isCompany :: String -> Bool
-isCompany x = True
+isCompany x = True  
