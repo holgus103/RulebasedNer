@@ -18,7 +18,7 @@ loadDataset path = do
 
 sampleFromRawEntry :: [[String]] -> Sample
 sampleFromRawEntry entry =
-    Sample {words = tail entry |> head, labels = head entry |> map tokenFromString }
+    Sample {words =  head entry, labels = tail entry |> head |> map tokenFromString }
     
 
 buildDictionary :: [Sample] ->  Map.Map String Token 

@@ -10,7 +10,7 @@ type Rule = ([String] -> Tagging)
 
 
 
-rules :: [Rule]
+rules :: [Rule] 
 rules = [detectCompany, detectProducts]
 
 processText :: [String] -> Map.Map String Token ->  [Token]

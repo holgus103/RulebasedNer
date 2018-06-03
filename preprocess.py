@@ -51,7 +51,7 @@ for v in data:
 
 z = list(zip(samples, tokens));
 output = json.dumps(z);
-file = open("output3.json", "w")
+file = open("output1.json", "w")
 file.write(output)
 file.close()
 
