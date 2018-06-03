@@ -6,12 +6,12 @@ import Flow
 import qualified Data.Map as Map
 import NER
 
-main :: IO (Map.Map Token Float)
+main :: IO (Map.Map Token (Float, Float, Float))
 main = do
     d <- loadDataset "output1.json"
     test <- loadDataset "output5.json"
     let total = sum $ map (\x -> Rules.Commons.words x |> length) test
-        f1calc (itp, ifp, ifn) = 2.0 / ((tp + fp)/tp + (tp + fn)/tp)
+        f1calc (itp, ifp, ifn) = (tp/(tp + fp), tp/(tp + fn), 2.0 / ((tp + fp)/tp + (tp + fn)/tp))
             where
                 tp = fromIntegral itp
                 fp = fromIntegral ifp
