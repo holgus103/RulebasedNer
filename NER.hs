@@ -3,6 +3,7 @@ module NER where
 import Rules.Commons
 import Rules.Company 
 import Rules.Product
+import Rules.Numbers
 import qualified Data.Map as Map
 
 type Rule = ([String] -> Tagging)
@@ -11,7 +12,7 @@ type Rule = ([String] -> Tagging)
 
 
 rules :: [Rule] 
-rules = [detectCompany, detectProducts]
+rules = [detectCompany, detectProducts, detectNumbers]
 
 processText :: [String] -> Map.Map String Token ->  [Token]
 processText [] _ = []
