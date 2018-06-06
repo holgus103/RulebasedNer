@@ -5,18 +5,23 @@ import Rules.Commons
 import Flow
 import qualified Data.Map as Map
 import NER
+import System.Random
+import System.Random.Shuffle
 
 main :: IO (Map.Map Token (Float, Float, Float))
 main = do
-    d <- loadDataset "output1.json"
-    test <- loadDataset "output5.json"
+    d <- loadDataset "output.json"
+    gen <- getStdGen
+    let len = length d
+    let shuffled = shuffle' d len gen
+    let (train, test) = splitAt (round (0.7 * (fromIntegral len))) shuffled 
     let total = sum $ map (\x -> Rules.Commons.words x |> length) test
         f1calc (itp, ifp, ifn) = (tp/(tp + fp), tp/(tp + fn), 2.0 / ((tp + fp)/tp + (tp + fn)/tp))
             where
                 tp = fromIntegral itp
                 fp = fromIntegral ifp
                 fn = fromIntegral ifn
-        dict = (buildDictionary d) in 
+        dict = (buildDictionary train) in 
             [None, Company, Unit, Num, Product, Shop]
             |> map (\x -> (x, (0, 0, 0))) 
             |> Map.fromList
